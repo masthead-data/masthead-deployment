@@ -1,13 +1,3 @@
-variable "project_id" {
-  type        = string
-  description = "The project id where to create resources. IAM & Admin->Settings->Project ID"
-}
-
-variable "project_number" {
-  type        = string
-  description = "The project number where to create resources. IAM & Admin->Settings->Project number"
-}
-
 provider "google" {
   project = var.project_id
 }
@@ -85,7 +75,7 @@ resource "google_project_iam_member" "masthead-dataplex-bigquery-jobUser-role" {
   member  = "serviceAccount:masthead-dataform@masthead-prod.iam.gserviceaccount.com"
 }
 
-#4. Create Log Sink. roles/pubsub.publisher will be assigned to default serviceAccount:cloud-logs@system.gserviceaccount.com
+#4. Create Log Sink.
 resource "google_logging_project_sink" "masthead_dataplex_sink" {
   depends_on = [google_pubsub_topic.masthead_dataform_topic,time_sleep.wait_30_seconds_to_enable_logging_service]
   description = "Masthead Dataform log sink"

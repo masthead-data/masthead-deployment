@@ -9,30 +9,22 @@ terraform {
   }
 }
 
-variable "project_id" {
-  type = string
-}
-
-variable "project_number" {
-  type = string
-}
-
-module "app" {
-  source = "./app"
+module "bigquery" {
+  source = "./modules/bigquery"
 
   project_id     = var.project_id
   project_number = var.project_number
 }
 
 module "dataform" {
-  source = "./dataform"
+  source = "./modules/dataform"
 
   project_id     = var.project_id
   project_number = var.project_number
 }
 
 module "dataplex" {
-  source = "./dataplex"
+  source = "./modules/dataplex"
 
   project_id     = var.project_id
   project_number = var.project_number

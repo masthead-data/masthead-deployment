@@ -1,13 +1,3 @@
-variable "project_id" {
-  type        = string
-  description = "The project id where to create resources. IAM & Admin->Settings->Project ID"
-}
-
-variable "project_number" {
-  type        = string
-  description = "The project number where to create resources. IAM & Admin->Settings->Project number"
-}
-
 provider "google" {
   project = var.project_id
 }
@@ -71,7 +61,7 @@ resource "google_pubsub_subscription" "masthead_dataplex_subscription" {
   depends_on = [time_sleep.wait_30_seconds_to_create_topic]
 }
 
-#3. Create custom role with permissions
+#3. Create custom role for Dataplex locations
 resource "google_project_iam_custom_role" "masthead_dataplex_locations" {
   role_id     = "masthead_dataplex_locations"
   title       = "masthead_dataplex_locations"
