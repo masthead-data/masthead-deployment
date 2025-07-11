@@ -13,12 +13,14 @@ variable "masthead_service_accounts" {
     bigquery_sa = string
     dataform_sa = string
     dataplex_sa = string
+    retro_sa    = string
   })
   description = "Masthead service account emails for different services"
   default = {
     bigquery_sa = "masthead-data@masthead-prod.iam.gserviceaccount.com"
     dataform_sa = "masthead-dataform@masthead-prod.iam.gserviceaccount.com"
     dataplex_sa = "masthead-dataplex@masthead-prod.iam.gserviceaccount.com"
+    retro_sa    = "retro-data@masthead-prod.iam.gserviceaccount.com"
   }
 }
 
@@ -36,6 +38,12 @@ variable "enable_modules" {
     dataplex      = true
     analytics_hub = true
   }
+}
+
+variable "enable_privatelogviewer_role" {
+  type        = bool
+  description = "Enable Private Log Viewer role for Masthead service account in BigQuery module"
+  default     = true
 }
 
 variable "labels" {

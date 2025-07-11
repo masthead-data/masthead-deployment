@@ -96,8 +96,8 @@ resource "google_pubsub_subscription_iam_member" "masthead_subscription_subscrib
   member       = "serviceAccount:${var.masthead_service_accounts.bigquery_sa}"
 }
 
-# Grant Masthead service account required permissions
-resource "google_project_iam_member" "masthead_bigquery_permissions" {
+# Grant Masthead service account required roles
+resource "google_project_iam_member" "masthead_bigquery_roles" {
   for_each = toset([
     "roles/bigquery.metadataViewer",
     "roles/bigquery.resourceViewer"
@@ -106,4 +106,13 @@ resource "google_project_iam_member" "masthead_bigquery_permissions" {
   project = var.project_id
   role    = each.value
   member  = "serviceAccount:${var.masthead_service_accounts.bigquery_sa}"
+}
+
+# Grant Masthead retro service account Private Log Viewer role (optional)
+resource "google_project_iam_member" "masthead_privatelogviewer_role" {
+  count = var.enable_privatelogviewer_role ? 1 : 0
+
+  project = var.project_id
+  role    = "roles/logging.privateLogViewer"
+  member  = "serviceAccount:${var.masthead_service_accounts.retro_sa}"
 }

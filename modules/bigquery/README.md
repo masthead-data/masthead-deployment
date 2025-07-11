@@ -23,6 +23,7 @@ This module sets up the necessary infrastructure for Masthead Data to monitor Bi
 
 ## Optional Variables
 
+- `enable_privatelogviewer_role`: Enable Private Log Viewer role for Masthead service account (default: true)
 - `labels`: Labels to apply to all resources
 
 ## Outputs

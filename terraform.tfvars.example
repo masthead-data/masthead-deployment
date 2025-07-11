@@ -12,6 +12,9 @@ project_id = "YOUR_PROJECT_ID"
 #   analytics_hub = true
 # }
 
+# Optional: Disable Private Log Viewer role (enabled by default)
+# enable_privatelogviewer_role = false
+
 # Optional: Add custom labels to all resources
 # labels = {
 #   environment = "production"

@@ -26,7 +26,6 @@ The module creates monitoring infrastructure for each enabled service:
 ```hcl
 module "masthead_agent" {
   source  = "masthead-data/masthead-agent/google"
-  version = "~> 0.2.2"
 
   project_id = "YOUR_PROJECT_ID"
 }
@@ -37,7 +36,6 @@ module "masthead_agent" {
 ```hcl
 module "masthead_agent" {
   source  = "masthead-data/masthead-agent/google"
-  version = "~> 0.2.2"
 
   project_id = "YOUR_PROJECT_ID"
 
@@ -48,6 +46,9 @@ module "masthead_agent" {
     dataplex      = true
     analytics_hub = true
   }
+
+  # Enable Private Log Viewer role for Masthead service account
+  enable_privatelogviewer_role = true
 
   # Custom labels for resource management
   labels = {
@@ -93,6 +94,8 @@ terraform apply tfplan
 |------|-------------|------|---------|:--------:|
 | `project_id` | The GCP project ID where resources will be created | `string` | n/a | yes |
 | `enable_modules` | Enable/disable specific modules | `object` | All enabled | no |
+| `masthead_service_accounts` | Masthead service account emails | `object` | Masthead defaults | no |
+| `enable_privatelogviewer_role` | Enable Private Log Viewer role for Masthead service account | `bool` | `true` | no |
 | `labels` | Labels to apply to all resources | `map(string)` | Default labels | no |
 
 ### Enable Modules Structure
@@ -113,6 +116,7 @@ masthead_service_accounts = {
   bigquery_sa  = string  # BigQuery monitoring service account
   dataform_sa  = string  # Dataform monitoring service account
   dataplex_sa  = string  # Dataplex monitoring service account
+  retro_sa     = string  # Retro analysis service account
 }
 ```
 
